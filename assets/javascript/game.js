@@ -31,7 +31,7 @@ function updateStats() {
 
 document.getElementById("wordBlanks").textContent = blanks.join(" ");
 document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
-document.getElementById("guesses").textContent = "Guesses: " + guesses;
+document.getElementById("guesses").textContent = "Guesses: " + guesses.join(" ");
 }
 
 function checkGuess(input) {
