@@ -1,5 +1,5 @@
 // word bank
-var wordBank = ["nintendo", "atari", "sega", "pacman"];
+var wordBank = ["nintendo", "atari", "sega", "pacman", "pinball"];
 // scoreboard vars
 var wins = 0;
 var losses = 0;
@@ -12,6 +12,7 @@ var randomWord;
 var randomWordArray = [];
 var blanks = [];
 
+// Random word generator
 randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 console.log(randomWord);
 randomWordArray = randomWord.split("");
@@ -19,6 +20,7 @@ console.log(randomWordArray);
 index = randomWordArray.length;
 console.log(index);
 
+// for loop to make a blank list
 for (i = 0; i < index; i++) {
 	blanks.push(" _ ");
 }
@@ -27,7 +29,7 @@ console.log("blanks: " + blanks);
 
 function updateStats() {
 
-document.getElementById("wordBlanks").textContent = blanks;
+document.getElementById("wordBlanks").textContent = blanks.join(" ");
 document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
 document.getElementById("guesses").textContent = "Guesses: " + guesses;
 }
@@ -36,12 +38,12 @@ function checkGuess(input) {
 	for (i = 0; i < index; i++) {
 		if (guess.includes(randomWordArray[i])) {
 			blanks[i] = guess;
-			document.getElementById("wordBlanks").textContent = blanks;
+			document.getElementById("wordBlanks").textContent = blanks.join(" ");
 		}
 
-	} 
+	}
 
-	if (!guess.includes(randomWordArray[i])) {
+	if (guess !== guess.includes(randomWordArray[i])) {
 			guesses.push(guess);
 			guessesLeft--;
 			console.log("guesses left: " + guessesLeft);
@@ -49,13 +51,13 @@ function checkGuess(input) {
 		}
 
 	if (blanks.toString() === randomWordArray.toString()) {
-		alert("You won!");
-		location.reload();
+		document.getElementById("start").textContent = "You Won!";
+		setTimeout(location.reload.bind(location), 3000);
 	}
 
 	if (guessesLeft === 0) {
-		alert("Try again");
-		location.reload();
+		document.getElementById("start").textContent = "You Lost...";
+		setTimeout(location.reload.bind(location), 3000);
 	}
 }
 
