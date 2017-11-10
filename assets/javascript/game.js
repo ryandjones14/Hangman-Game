@@ -43,7 +43,7 @@ function checkGuess(input) {
 
 	}
 
-	if (guess !== guess.includes(randomWordArray[i])) {
+	if (!guess.includes(randomWordArray[i])) {
 			guesses.push(guess);
 			guessesLeft--;
 			console.log("guesses left: " + guessesLeft);
