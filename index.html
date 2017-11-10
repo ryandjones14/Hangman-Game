@@ -4,17 +4,23 @@
 	<meta charset="UFT-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Hangman</title>
+	<!-- Own CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Shade" rel="stylesheet">
 </head>
 <body>
-	<h1>Hangman</h1>
-	<p><span id="start">Press 'Enter' to play!</span></p>
-	<p><span id="wordBlanks"></span></p>
-	<p><span id="wordChoice"></span></p>
-	<p><span id="wins"></span></p>
-	<p><span id="losses"></span></p>
-	<p><span id="guessesLeft"></span></p>
-	<p><span id="guesses"></span></p>
+	<div class="wrapper">
+		<div class="container">
+			<h1>Hangman</h1>
+		</div>
+		<div class="container">
+			<p><span id="start">Press Any Key To Start!</span></p>
+			<p><span id="wordBlanks">Your Word</span></p>
+			<p><span id="guessesLeft">Guesses Left:</span></p>
+			<p><span id="guesses">Guesses:</span></p>
+		</div>
+	</div>
 
 	<script type="text/javaScript" src="assets/javascript/game.js"></script>
 </body>
