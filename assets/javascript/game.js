@@ -1,12 +1,15 @@
 // word bank
 var wordBank = ["nintendo", "atari", "sega", "pacman", "pinball"];
+
 // scoreboard vars
 var wins = 0;
 var losses = 0;
+
 // guesses vars
 var guess;
 var guesses = [];
 var guessesLeft = 12;
+
 // random word vars
 var randomWord;
 var randomWordArray = [];
@@ -27,6 +30,7 @@ for (i = 0; i < index; i++) {
 
 console.log("blanks: " + blanks);
 
+// updates stats
 function updateStats() {
 
 document.getElementById("wordBlanks").textContent = blanks.join(" ");
@@ -34,6 +38,8 @@ document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesL
 document.getElementById("guesses").textContent = "Guesses: " + guesses.join(" ");
 }
 
+
+// checks letter
 function checkGuess(input) {
 	for (i = 0; i < index; i++) {
 		if (guess.includes(randomWordArray[i])) {
@@ -61,6 +67,7 @@ function checkGuess(input) {
 	}
 }
 
+// key press function
 document.onkeyup = function(event) {
 	guess = String.fromCharCode(event.keyCode).toLowerCase();
 	console.log("Guess: " + guess);
