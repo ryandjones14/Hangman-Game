@@ -8,7 +8,7 @@ var losses = 0;
 // guesses vars
 var guess;
 var guesses = [];
-var guessesLeft = 12;
+var guessesLeft = 13;
 
 // random word vars
 var randomWord;
