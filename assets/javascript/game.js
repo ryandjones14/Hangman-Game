@@ -1,76 +1,70 @@
 // word bank
-var wordBank = ["nintendo", "atari", "sega", "pacman", "pinball"];
+let wordBank = ["nintendo", "atari", "sega", "pacman", "pinball", "zelda", "mario", "sonic"];
 
 // scoreboard vars
-var wins = 0;
-var losses = 0;
+let wins = 0;
+let losses = 0;
 
 // guesses vars
-var guess;
-var guesses = [];
-var guessesLeft = 13;
+let guess;
+let guesses = [];
+let guessesLeft = 12;
 
 // random word vars
-var randomWord;
-var randomWordArray = [];
-var blanks = [];
+let randomWord;
+let randomWordArray = [];
+let blanks = [];
 
 // Random word generator
 randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-console.log(randomWord);
 randomWordArray = randomWord.split("");
-console.log(randomWordArray);
 index = randomWordArray.length;
-console.log(index);
 
 // for loop to make a blank list
-for (i = 0; i < index; i++) {
+for (let i = 0; i < index; i++) {
 	blanks.push(" _ ");
 }
 
-console.log("blanks: " + blanks);
-
 // updates stats
 function updateStats() {
-
-document.getElementById("wordBlanks").textContent = blanks.join(" ");
-document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
-document.getElementById("guesses").textContent = "Guesses: " + guesses.join(" ");
+	document.getElementById("start").textContent = "";
+	document.getElementById("wordBlanks").textContent = blanks.join(" ");
+	document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
+	document.getElementById("guesses").textContent = "Guesses: " + guesses.join(" ");
 }
 
-
-// checks letter
-function checkGuess(input) {
-	for (i = 0; i < index; i++) {
-		if (guess.includes(randomWordArray[i])) {
-			blanks[i] = guess;
-			document.getElementById("wordBlanks").textContent = blanks.join(" ");
-		}
-
-	}
-
-	if (!guess.includes(randomWordArray[i])) {
-			guesses.push(guess);
-			guessesLeft--;
-			console.log("guesses left: " + guessesLeft);
-			console.log("Guesses: " + guesses);
-		}
-
-	if (blanks.toString() === randomWordArray.toString()) {
-		document.getElementById("start").textContent = "You Won!";
-		setTimeout(location.reload.bind(location), 3000);
-	}
-
-	if (guessesLeft === 0) {
-		document.getElementById("start").textContent = "You Lost...";
-		setTimeout(location.reload.bind(location), 3000);
-	}
+function clearStats() {
+	document.getElementById("wordBlanks").textContent = "";
+	document.getElementById("guessesLeft").textContent = "";
+	document.getElementById("guesses").textContent = "";
 }
 
 // key press function
 document.onkeyup = function(event) {
 	guess = String.fromCharCode(event.keyCode).toLowerCase();
-	console.log("Guess: " + guess);
-	checkGuess(guess);
 	updateStats();
+
+	for (i = 0; i < index; i++) {
+		if (guess.includes(randomWordArray[i])) {
+			blanks[i] = guess;
+			document.getElementById("wordBlanks").textContent = blanks.join(" ");
+		}
+	}
+
+	if (!guess.includes(randomWordArray[i])) {
+			guesses.push(guess);
+			guessesLeft--;
+		}
+
+	if (blanks.toString() === randomWordArray.toString()) {
+		document.getElementById("start").textContent = "You Won!";
+		clearStats();
+		setTimeout(location.reload.bind(location), 1000);
+	}
+
+	if (guessesLeft === 0) {
+		document.getElementById("start").textContent = "You Lost...";
+		clearStats();
+		setTimeout(location.reload.bind(location), 1000);
+	}
 }
