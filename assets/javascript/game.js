@@ -30,7 +30,7 @@ function updateStats() {
 	document.getElementById("start").textContent = "";
 	document.getElementById("wordBlanks").textContent = blanks.join(" ");
 	document.getElementById("guessesLeft").textContent = "Guesses Left: " + guessesLeft;
-	document.getElementById("guesses").textContent = "Guesses: " + guesses.join(" ");
+	document.getElementById("guesses").innerHTML = "Guesses: " + guesses;
 }
 
 function clearStats() {
@@ -39,32 +39,41 @@ function clearStats() {
 	document.getElementById("guesses").textContent = "";
 }
 
-// key press function
-document.onkeyup = function(event) {
-	guess = String.fromCharCode(event.keyCode).toLowerCase();
-	updateStats();
-
+function makeGuess(letter) {
 	for (i = 0; i < index; i++) {
-		if (guess.includes(randomWordArray[i])) {
-			blanks[i] = guess;
+		if (letter.includes(randomWordArray[i])) {
+			blanks[i] = letter;
+			guesses.push(letter);
 			document.getElementById("wordBlanks").textContent = blanks.join(" ");
 		}
+		// updateStats();
 	}
 
-	if (!guess.includes(randomWordArray[i])) {
-			guesses.push(guess);
-			guessesLeft--;
-		}
+	if (!randomWordArray.includes(letter)) {
+		let guess = `<span class="wrong">${letter}</span>`;		
+		guesses.push(guess);
+		guessesLeft--;
+		// updateStats();
+	}
+	updateStats();
+};
 
+// key press function
+document.onkeyup = function(event) {
+	letter = String.fromCharCode(event.keyCode).toLowerCase();
+
+	if (64 < event.keyCode && event.keyCode < 91) {
+		makeGuess(letter);
+	}
 	if (blanks.toString() === randomWordArray.toString()) {
-		document.getElementById("start").textContent = "You Won!";
+		document.getElementById("start").textContent = `It was ${randomWord}! You Won!`;
 		clearStats();
-		setTimeout(location.reload.bind(location), 1000);
+		setTimeout(location.reload.bind(location), 4500);
 	}
 
 	if (guessesLeft === 0) {
-		document.getElementById("start").textContent = "You Lost...";
+		document.getElementById("start").textContent = `It was ${randomWord}, you lost...`;
 		clearStats();
-		setTimeout(location.reload.bind(location), 1000);
+		setTimeout(location.reload.bind(location), 4500);
 	}
 }

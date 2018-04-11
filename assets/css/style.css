@@ -30,3 +30,7 @@ p {
 	max-width: 700px;
 	margin: 0 auto;
 }
+
+.wrong {
+	color: rgb(175, 32, 32);
+}
